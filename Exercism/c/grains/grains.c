@@ -29,16 +29,7 @@ uint64_t square(uint8_t index)
     return 1ULL << (index - 1);
 }
 
-/**
- * Calculates the total number of grains on all 64 squares.
- * The sum of a power-of-two series (2^0 + ... + 2^n) is (2^(n+1) - 1).
- */
 uint64_t total(void)
 {
-    /* * For 64 squares, the sum is 2^64 - 1.
-     * This value is the maximum possible value for a uint64_t.
-     * In C, ~0ULL (bitwise NOT on 0) flips all 64 bits to 1,
-     * which represents 18,446,744,073,709,551,615.
-     */
     return ~0ULL;
 }
