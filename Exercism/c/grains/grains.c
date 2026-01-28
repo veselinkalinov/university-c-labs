@@ -21,15 +21,11 @@ int main()
 
 uint64_t square(uint8_t index)
 {
-    // Basic validation: A chessboard only has 64 squares.
     if (index < 1 || index > 64)
     {
         return 0;
     }
 
-    /* * We use 1ULL (1 as an Unsigned Long Long) to ensure 64-bit precision.
-     * Shifting 1 left by (index - 1) is mathematically equal to 2^(index-1).
-     */
     return 1ULL << (index - 1);
 }
 
