@@ -1,13 +1,20 @@
 #include "grains.h"
 #include <stdio.h>
-main()
+#include <stdint.h>
+
+int main()
 {
     unsigned int n;
 
-    printf("Square Num: ");
-    scanf("%u", &n);
+    printf("Square Num (1-64): ");
+    if (scanf("%u", &n) != 1)
+        return 1;
 
-    printf("\nResults %u squares:\n", n);
-    printf("\nThe number of grains on a given square: %u\n", square(n));
-    printf("\nThe total number of grains on the chessboard: %u\n", total(n));
+    printf("\nResults for square %u:\n", n);
+
+    printf("Grains on this square: %llu\n", square((uint8_t)n));
+
+    printf("Total grains on the whole board: %llu\n", total());
+
+    return 0;
 }
