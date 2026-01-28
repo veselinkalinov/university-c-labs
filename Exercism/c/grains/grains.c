@@ -12,9 +12,9 @@ int main()
 
     printf("\nResults for square %u:\n", n);
 
-    printf("Grains on this square: %llu\n", square((uint8_t)n));
+    printf("Grains on this square: %lu\n", square((uint8_t)n));
 
-    printf("Total grains on the whole board: %llu\n", total());
+    printf("Total grains on the whole board: %lu\n", total());
 
     return 0;
 }
