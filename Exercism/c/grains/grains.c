@@ -2,6 +2,23 @@
 #include <stdio.h>
 #include <stdint.h>
 
+int main()
+{
+    unsigned int n;
+
+    printf("Square Num (1-64): ");
+    if (scanf("%u", &n) != 1)
+        return 1;
+
+    printf("\nResults for square %u:\n", n);
+
+    printf("Grains on this square: %lu\n", square((uint8_t)n));
+
+    printf("Total grains on the whole board: %lu\n", total());
+
+    return 0;
+}
+
 uint64_t square(uint8_t index)
 {
     if (index < 1 || index > 64)
