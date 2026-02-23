@@ -6,7 +6,6 @@ int main()
     unsigned int n;
 
     printf("Enter a natural number (N): ");
-
     if (scanf("%u", &n) != 1)
     {
         printf("Invalid input. Please enter a positive integer.\n");
