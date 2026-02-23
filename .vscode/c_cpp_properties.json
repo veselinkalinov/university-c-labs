@@ -3,10 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**",
-                "C:/ProgramData/mingw64/mingw64/x86_64-w64-mingw32/include",
-                "C:/ProgramData/mingw64/mingw64/include",
-                "C:/ProgramData/mingw64/mingw64/lib/gcc/x86_64-w64-mingw32/15.2.0/include"
+                "${workspaceFolder}/**"
             ],
             "defines": [
                 "_DEBUG",
