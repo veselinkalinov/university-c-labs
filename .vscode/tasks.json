@@ -2,18 +2,14 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "type": "cppbuild",
-            "label": "MY_CUSTOM_BUILD",
-            "command": "C:\\MinGW\\bin\\gcc.exe",
+            "type": "shell",
+            "label": "Build Active File with Make",
+            "command": "C:\\msys64\\usr\\bin\\make.exe",
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}\\build\\${fileBasenameNoExtension}.exe"
+                "${relativeFileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "${workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"
@@ -22,7 +18,7 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "detail": "Compiler: C:\\MinGW\\bin\\gcc.exe"
+            "detail": "Uses the generic Makefile to build the current file."
         }
     ]
 }
