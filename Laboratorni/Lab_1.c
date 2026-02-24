@@ -7,5 +7,12 @@ int main()
     printf("%d", num);
     printf("%s", "\nHello World");
     return 0;
-    print
+
+    int a = 10;
+    int b = 5;
+    int c = a+++--b;
+    printf("%d", c);
+    int d = ++a-b--;
+    printf("%d", d);
+
 }
