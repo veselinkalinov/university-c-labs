@@ -14,11 +14,19 @@
             "problemMatcher": [
                 "$gcc"
             ],
+            "group": "build",
+            "detail": "Uses the generic Makefile to build the current file."
+        },
+        {
+            "type": "cmake",
+            "label": "CMake: configure",
+            "command": "configure",
+            "problemMatcher": [],
+            "detail": "CMake template configure task",
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "detail": "Uses the generic Makefile to build the current file."
+            }
         }
     ]
 }
