@@ -3,7 +3,7 @@
         {
             "name": "windows-gcc-x64",
             "includePath": [
-                "C:/msys64/ucrt64/include/**"
+                "${workspaceFolder}/**"
             ],
             "defines": [
                 "_DEBUG",
