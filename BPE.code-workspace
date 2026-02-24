@@ -6,6 +6,7 @@
     ],
     "settings": {
         "gitdoc.enabled": true,
-        "git.ignoreLimitWarning": true
+        "git.ignoreLimitWarning": true,
+        "editor.guides.indentation": false
     }
 }
