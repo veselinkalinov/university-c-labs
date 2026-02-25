@@ -23,3 +23,9 @@ int main()
 }
 
 // zad 2
+int main()
+{
+    float inch;
+    printf("Inches:");
+    scanf("%f", &inch);
+}
