@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include <math.h>
 
-// zad 1
 int main()
 {
     char ch;
@@ -20,19 +18,4 @@ int main()
         }
         printf("\n");
     }
-}
-
-// zad 2
-int main()
-{
-    double inch;
-    printf("Inches:");
-    scanf("%f", &inch);
-
-    double mm = inch * 25.4;
-    double cm = inch * 2.54;
-    double dm = inch * 0.254;
-    double m = inch * 0.0254
-
-               printf("%4f")
 }
