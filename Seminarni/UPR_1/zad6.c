@@ -3,12 +3,14 @@
 int main()
 {
     int a, b, h;
-    printf("Enter side a:");
-    printf("\nEnter side b:");
-    printf("\nEnter height h:");
-    scanf("%d", &a, &b, &h);
+    printf("Enter side a:\n2");
+    scanf("%d", &a);
+    printf("Enter side b:\n");
+    scanf("%d", &b);
+    printf("Enter height h:");
+    scanf("%d", &h);
 
     int s = ((a + b) * h) / 2;
-    printf("%d = ", s);
+    printf("s = %d", s);
     return 0;
 }
