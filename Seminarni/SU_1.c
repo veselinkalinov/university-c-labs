@@ -21,3 +21,5 @@ int main()
         printf("\n");
     }
 }
+
+// zad 2
