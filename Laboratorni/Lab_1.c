@@ -17,5 +17,5 @@ int main()
     printf("%d", b);
     printf("%d", c);
     printf("%d", d);
-    pri
+
 }
