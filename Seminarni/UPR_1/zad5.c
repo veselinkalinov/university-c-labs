@@ -2,9 +2,11 @@
 
 int main()
 {
-    int lev;
-    printf("Enter levs:");
-    scanf("%d", &lev);
+    int bgn;
+    printf("Enter BGN:");
+    scanf("%d", &bgn);
 
-    int dollars = lev
+    double usd = bgn * 0.61;
+    printf("%d BGN is %.2lf USD", bgn, usd);
+    return 0;
 }
