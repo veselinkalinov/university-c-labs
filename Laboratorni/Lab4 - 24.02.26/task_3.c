@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-char reverse(char str[]) {
+int reverse(char str[]) {
   int size = 0;
   while (str[size] != '\0') {
     size++;
