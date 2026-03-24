@@ -13,7 +13,6 @@ void sort(int arr[], int size) {
 }
 
 void print(int arr[], int size) {
-  int i;
-  for (i = 0; i < size; i++)
+  for (int i = 0; i < size; i++)
     printf("%d ", arr[i]);
 }
