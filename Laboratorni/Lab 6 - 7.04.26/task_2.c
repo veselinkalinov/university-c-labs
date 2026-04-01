@@ -5,21 +5,22 @@ int main(void) {
   int n = 7;
   int *arr = (int *)malloc(n * sizeof(int));
   if (arr == NULL) {
-    fprintf(stderr, "Грешка при заделяне на памет\n");
     exit(1);
   }
 
-  printf("Enter %d numbers [-5000..5000]:\n", n);
+  printf("Enter %d numbers[-5000..5000]:\n", n);
   for (int i = 0; i < n; i++) {
     scanf("%d", &arr[i]);
   }
 
-  int sum = 0;
-  for (int i = 0; i < n; i++) {
-    sum += arr[i];
+  int max = arr[0];
+  for (int i = 1; i < n; i++) {
+    if (arr[i] > max) {
+      max = arr[i];
+    }
   }
 
-  printf("Sum: %d\n", sum);
+  printf("Max: %d\n", max);
 
   free(arr);
   return 0;

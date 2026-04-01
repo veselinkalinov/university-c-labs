@@ -19,7 +19,8 @@ int main(void) {
     sum += arr[i];
   }
 
-  printf("Sum: %d\n", sum);
+  double avg = (double)sum / n;
+  printf("Avg: %.2f\n", avg);
 
   free(arr);
   return 0;
