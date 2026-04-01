@@ -5,7 +5,6 @@ int main(void) {
   int n = 7;
   int *arr = (int *)malloc(n * sizeof(int));
   if (arr == NULL) {
-    fprintf(stderr, "Грешка при заделяне на памет\n");
     exit(1);
   }
 
