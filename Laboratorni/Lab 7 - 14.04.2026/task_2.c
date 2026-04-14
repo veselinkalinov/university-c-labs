@@ -2,8 +2,7 @@
 #include <stdlib.h>
 
 double averageArray(const int *arr, int size);
-void addAverageCountElements(int **arr, int *size);
-void printArray(const int *arr, int size);
+int *addElementsFromStart(int *arr, int size, int countToAdd);
 
 int main(void) {
   int n;
@@ -13,7 +12,7 @@ int main(void) {
 
   int *arr = (int *)malloc(n * sizeof(int));
   if (arr == NULL) {
-    printf("malloc error!\n");
+    printf("Memory allocation error!\n");
     return 1;
   }
 
@@ -22,10 +21,20 @@ int main(void) {
     scanf("%d", &arr[i]);
   }
 
-  printf("Average value = %.2lf\n", averageArray(arr, n));
-  addAverageCountElements(&arr, &n);
+  double average = averageArray(arr, n);
+  int countToAdd = (int)average;
+  int oldSize = n;
 
-  printf("New array:\n");
+  arr = addElementsFromStart(arr, oldSize, countToAdd);
+  if (arr == NULL) {
+    printf("Memory reallocation error!\n");
+    return 1;
+  }
+
+  n = oldSize + countToAdd;
+
+  printf("Average value = %.2lf\n", average);
+  printf("New array: ");
   for (int i = 0; i < n; i++) {
     printf("%d ", arr[i]);
   }
@@ -33,27 +42,6 @@ int main(void) {
 
   free(arr);
   return 0;
-}
-
-void addAverageCountElements(int **arr, int *size) {
-  int countToAdd = (int)averageArray(*arr, *size);
-  int oldSize = *size;
-
-  if (countToAdd <= 0) {
-    return;
-  }
-
-  *arr = (int *)realloc(*arr, (oldSize + countToAdd) * sizeof(int));
-  if (*arr == NULL) {
-    printf("realloc error!\n");
-    exit(1);
-  }
-
-  for (int i = 0; i < countToAdd; i++) {
-    (*arr)[oldSize + i] = (*arr)[i % oldSize];
-  }
-
-  *size = oldSize + countToAdd;
 }
 
 double averageArray(const int *arr, int size) {
@@ -64,4 +52,21 @@ double averageArray(const int *arr, int size) {
   }
 
   return (double)sum / size;
+}
+
+int *addElementsFromStart(int *arr, int size, int countToAdd) {
+  if (countToAdd <= 0) {
+    return arr;
+  }
+
+  int *newArr = (int *)realloc(arr, (size + countToAdd) * sizeof(int));
+  if (newArr == NULL) {
+    return NULL;
+  }
+
+  for (int i = 0; i < countToAdd; i++) {
+    newArr[size + i] = newArr[i % size];
+  }
+
+  return newArr;
 }
