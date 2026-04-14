@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double findAverage(const int *arr, int size);
+double averageArray(const int *arr, int size);
 
 int main(void) {
   int n;
@@ -20,13 +20,13 @@ int main(void) {
     scanf("%d", &arr[i]);
   }
 
-  printf("Average value = %.2lf\n", findAverage(arr, n));
+  printf("Average value = %.2lf\n", averageArray(arr, n));
 
   free(arr);
   return 0;
 }
 
-double findAverage(const int *arr, int size) {
+double averageArray(const int *arr, int size) {
   int sum = 0;
 
   for (int i = 0; i < size; i++) {

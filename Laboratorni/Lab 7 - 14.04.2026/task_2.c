@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-double findAverage(const int *arr, int size);
+double averageArray(const int *arr, int size);
+void addAverageCountElements(int **arr, int *size);
 void printArray(const int *arr, int size);
 
 int main(void) {
@@ -21,25 +22,9 @@ int main(void) {
     scanf("%d", &arr[i]);
   }
 
-  double average = findAverage(arr, n);
-  int countToAdd = (int)average;
-  int oldSize = n;
+  printf("Average value = %.2lf\n", averageArray(arr, n));
+  addAverageCountElements(&arr, &n);
 
-  if (countToAdd > 0) {
-    arr = (int *)realloc(arr, (n + countToAdd) * sizeof(int));
-    if (arr == NULL) {
-      printf("Memory reallocation error!\n");
-      return 1;
-    }
-
-    for (int i = 0; i < countToAdd; i++) {
-      arr[oldSize + i] = arr[i % oldSize];
-    }
-
-    n += countToAdd;
-  }
-
-  printf("Average value = %.2lf\n", average);
   printf("New array:\n");
   printArray(arr, n);
 
@@ -47,7 +32,7 @@ int main(void) {
   return 0;
 }
 
-double findAverage(const int *arr, int size) {
+double averageArray(const int *arr, int size) {
   int sum = 0;
 
   for (int i = 0; i < size; i++) {
@@ -55,6 +40,27 @@ double findAverage(const int *arr, int size) {
   }
 
   return (double)sum / size;
+}
+
+void addAverageCountElements(int **arr, int *size) {
+  int countToAdd = (int)averageArray(*arr, *size);
+  int oldSize = *size;
+
+  if (countToAdd <= 0) {
+    return;
+  }
+
+  *arr = (int *)realloc(*arr, (oldSize + countToAdd) * sizeof(int));
+  if (*arr == NULL) {
+    printf("Memory reallocation error!\n");
+    exit(1);
+  }
+
+  for (int i = 0; i < countToAdd; i++) {
+    (*arr)[oldSize + i] = (*arr)[i % oldSize];
+  }
+
+  *size = oldSize + countToAdd;
 }
 
 void printArray(const int *arr, int size) {
