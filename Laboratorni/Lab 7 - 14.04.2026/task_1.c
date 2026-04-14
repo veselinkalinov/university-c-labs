@@ -18,7 +18,7 @@ int main(void) {
 
 void reverseArr(int *arr, int size) {
   int start = 0, end = size - 1, temp;
-  for (; size <= end; end--) {
+  for (; start < end; start++, end--) {
     temp = arr[start];
     arr[start] = arr[end];
     arr[end] = temp;
