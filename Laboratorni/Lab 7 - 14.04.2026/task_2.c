@@ -26,7 +26,10 @@ int main(void) {
   addAverageCountElements(&arr, &n);
 
   printf("New array:\n");
-  printArray(arr, n);
+  for (int i = 0; i < n; i++) {
+    printf("%d ", arr[i]);
+  }
+  printf("\n");
 
   free(arr);
   return 0;
@@ -61,11 +64,4 @@ void addAverageCountElements(int **arr, int *size) {
   }
 
   *size = oldSize + countToAdd;
-}
-
-void printArray(const int *arr, int size) {
-  for (int i = 0; i < size; i++) {
-    printf("%d ", arr[i]);
-  }
-  printf("\n");
 }
