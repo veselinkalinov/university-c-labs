@@ -12,7 +12,7 @@ int main(void) {
   int *arr = (int *)malloc(n * sizeof(int));
   if (arr == NULL) {
     printf("malloc error!\n");
-    return 1;
+    exit(1);
   }
 
   for (int i = 0; i < n; i++) {
