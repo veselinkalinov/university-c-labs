@@ -27,7 +27,7 @@ int main(void) {
 
   arr = addElementsFromStart(arr, oldSize, countToAdd);
   if (arr == NULL) {
-    printf("malloc error!\n");
+    printf("realloc error!\n");
     return 1;
   }
 
