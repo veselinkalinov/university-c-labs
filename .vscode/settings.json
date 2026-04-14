@@ -144,5 +144,5 @@
         "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
         "gleam": "gleam run -m $fileNameWithoutExt"
     },
-    "gitdoc.enabled": true
+    "gitdoc.enabled": false
 }
