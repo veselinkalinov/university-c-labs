@@ -33,7 +33,7 @@ int main(void) {
 
   n = oldSize + countToAdd;
 
-  printf("Average value = %.2lf\n", average);
+  printf("AVG = %.2lf\n", average);
   printf("New array: ");
   for (int i = 0; i < n; i++) {
     printf("%d ", arr[i]);
