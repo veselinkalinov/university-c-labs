@@ -44,16 +44,6 @@ int main(void) {
   return 0;
 }
 
-double averageArray(const int *arr, int size) {
-  int sum = 0;
-
-  for (int i = 0; i < size; i++) {
-    sum += arr[i];
-  }
-
-  return (double)sum / size;
-}
-
 int *addElementsFromStart(int *arr, int size, int countToAdd) {
   if (countToAdd <= 0) {
     return arr;
@@ -69,4 +59,14 @@ int *addElementsFromStart(int *arr, int size, int countToAdd) {
   }
 
   return newArr;
+}
+
+double averageArray(const int *arr, int size) {
+  int sum = 0;
+
+  for (int i = 0; i < size; i++) {
+    sum += arr[i];
+  }
+
+  return (double)sum / size;
 }
