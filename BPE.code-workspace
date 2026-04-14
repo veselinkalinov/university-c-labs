@@ -5,7 +5,7 @@
         }
     ],
     "settings": {
-        "gitdoc.enabled": true,
+        "gitdoc.enabled": false,
         "git.ignoreLimitWarning": true,
         "editor.guides.indentation": false,
         "editor.guides.bracketPairsHorizontal": "active"
