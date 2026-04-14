@@ -13,7 +13,7 @@ int main(void) {
 
   int *arr = (int *)malloc(n * sizeof(int));
   if (arr == NULL) {
-    printf("Memory allocation error!\n");
+    printf("malloc error!\n");
     return 1;
   }
 
@@ -52,7 +52,7 @@ void addAverageCountElements(int **arr, int *size) {
 
   *arr = (int *)realloc(*arr, (oldSize + countToAdd) * sizeof(int));
   if (*arr == NULL) {
-    printf("Memory reallocation error!\n");
+    printf("realloc error!\n");
     exit(1);
   }
 
