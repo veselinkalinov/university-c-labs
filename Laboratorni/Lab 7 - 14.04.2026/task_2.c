@@ -12,7 +12,7 @@ int main(void) {
 
   int *arr = (int *)malloc(n * sizeof(int));
   if (arr == NULL) {
-    printf("Memory allocation error!\n");
+    printf("malloc error!\n");
     return 1;
   }
 
@@ -27,7 +27,7 @@ int main(void) {
 
   arr = addElementsFromStart(arr, oldSize, countToAdd);
   if (arr == NULL) {
-    printf("Memory reallocation error!\n");
+    printf("malloc error!\n");
     return 1;
   }
 
