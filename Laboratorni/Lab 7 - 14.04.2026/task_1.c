@@ -5,6 +5,13 @@ void reverseArr(int *arr, int size);
 
 int main(void) {
   int arr[SIZE] = {1, 2, 3, 4, 5};
+  for (int i = 0; i < SIZE; i++) {
+    printf("arr[%d] = %d\n", i, arr[i]);
+  }
+  reverseArr(arr, SIZE);
+  for (int i = 0; i < SIZE; i++) {
+    printf("arr[%d] = %d\n", i, arr[i]);
+  }
 
   return 0;
 }
