@@ -18,7 +18,6 @@ char reverse(char str[]) {
 int main() {
   char arr[] = "Reverse";
   printf("Original array: %s\n", arr);
-
   reverse(arr);
 
   printf("Reversed array: %s\n", arr);
