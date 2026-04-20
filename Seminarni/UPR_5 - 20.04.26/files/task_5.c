@@ -2,7 +2,7 @@
 #include <string.h>
 
 int main() {
-  char word[] = "concatenation";
+  char word[] = "programming";
   char display[100];
   int len = (int)strlen(word);
   int guesses = 0;
