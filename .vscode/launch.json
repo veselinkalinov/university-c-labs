@@ -5,7 +5,7 @@
             "name": "Debug Active C File",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/active.exe",
+            "program": "${env:LOCALAPPDATA}/BPE/active.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

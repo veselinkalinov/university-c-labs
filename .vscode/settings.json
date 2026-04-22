@@ -88,9 +88,9 @@
     "code-runner.executorMap": {
         "javascript": "node",
         "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
-        "c": "cd $dir; gcc $fileName -o \"$workspaceRoot/build/active.exe\"; & \"$workspaceRoot/build/active.exe\"",
+        "c": "New-Item -ItemType Directory -Force \"$env:LOCALAPPDATA\\BPE\" | Out-Null; cd $dir; gcc $fileName -g -o \"$env:LOCALAPPDATA\\BPE\\active.exe\"; & \"$env:LOCALAPPDATA\\BPE\\active.exe\"",
         "zig": "zig run",
-        "cpp": "cd $dir; g++ $fileName -o \"$workspaceRoot/build/active.exe\"; & \"$workspaceRoot/build/active.exe\"",
+        "cpp": "New-Item -ItemType Directory -Force \"$env:LOCALAPPDATA\\BPE\" | Out-Null; cd $dir; g++ $fileName -g -o \"$env:LOCALAPPDATA\\BPE\\active.exe\"; & \"$env:LOCALAPPDATA\\BPE\\active.exe\"",
         "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "php": "php",
         "python": "python -u",
@@ -157,3 +157,4 @@
             "**/*.exe": true
         }
     }
+

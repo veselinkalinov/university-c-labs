@@ -1,0 +1,1 @@
+This is some random content in the file. Using func called fgets.

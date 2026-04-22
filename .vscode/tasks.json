@@ -4,12 +4,13 @@
         {
             "label": "Build Active C File",
             "type": "shell",
-            "command": "gcc",
+            "command": "powershell",
             "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${workspaceFolder}/build/active.exe"
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "New-Item -ItemType Directory -Force \"$env:LOCALAPPDATA/BPE\" | Out-Null; gcc '${file}' -g -o \"$env:LOCALAPPDATA/BPE/active.exe\""
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -26,7 +27,14 @@
             "label": "Run Active C File",
             "type": "shell",
             "dependsOn": "Build Active C File",
-            "command": "${workspaceFolder}/build/active.exe",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy",
+                "Bypass",
+                "-Command",
+                "& \"$env:LOCALAPPDATA/BPE/active.exe\""
+            ],
             "options": {
                 "cwd": "${fileDirname}"
             },
