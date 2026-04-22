@@ -2,29 +2,36 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Build Active C File",
             "type": "shell",
-            "label": "Build Active File with Make",
-            "command": "C:\\msys64\\usr\\bin\\make.exe",
+            "command": "gcc",
             "args": [
-                "${relativeFileDirname}/${fileBasenameNoExtension}"
+                "-g",
+                "${file}",
+                "-o",
+                "${workspaceFolder}/build/active.exe"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${fileDirname}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
             },
             "problemMatcher": [
                 "$gcc"
-            ],
-            "group": "build",
-            "detail": "Uses the generic Makefile to build the current file."
+            ]
         },
         {
-            "type": "cmake",
-            "label": "CMake: configure",
-            "command": "configure",
-            "problemMatcher": [],
-            "detail": "CMake template configure task",
+            "label": "Run Active C File",
+            "type": "shell",
+            "dependsOn": "Build Active C File",
+            "command": "${workspaceFolder}/build/active.exe",
+            "options": {
+                "cwd": "${fileDirname}"
+            },
             "group": {
-                "kind": "build",
+                "kind": "test",
                 "isDefault": true
             }
         }

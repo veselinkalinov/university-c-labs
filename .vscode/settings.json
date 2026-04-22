@@ -88,9 +88,9 @@
     "code-runner.executorMap": {
         "javascript": "node",
         "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
-        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "c": "cd $dir; gcc $fileName -o \"$workspaceRoot/build/active.exe\"; & \"$workspaceRoot/build/active.exe\"",
         "zig": "zig run",
-        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+        "cpp": "cd $dir; g++ $fileName -o \"$workspaceRoot/build/active.exe\"; & \"$workspaceRoot/build/active.exe\"",
         "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "php": "php",
         "python": "python -u",
@@ -142,7 +142,18 @@
         "erlang": "escript",
         "spwn": "spwn build",
         "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
-        "gleam": "gleam run -m $fileNameWithoutExt"
-    },
-    "gitdoc.enabled": false
-}
+            "gleam": "gleam run -m $fileNameWithoutExt"
+        },
+        "gitdoc.enabled": false,
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 500,
+        "editor.formatOnSave": false,
+        "code-runner.runInTerminal": true,
+        "code-runner.fileDirectoryAsCwd": true,
+        //"C_Cpp.default.compilerPath": "gcc",
+        //"C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
+        //"C_Cpp.errorSquiggles": "Enabled",
+        "files.exclude": {
+            "**/*.exe": true
+        }
+    }
