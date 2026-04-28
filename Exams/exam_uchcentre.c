@@ -72,6 +72,7 @@ int main(void)
         printf("%50s - %10s - %d - %.2f", arr[i].name, arr[i].date, arr[i].lectures, arr[i].price);
     }
 
+    ArrToText(arr, n, 300, 700);
 
     free(arr);
     return 0;
