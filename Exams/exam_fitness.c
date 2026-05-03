@@ -2,109 +2,91 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct
-{
-    char name[56];
-    char id[7];
-    float price;
-    int locker;
-} Member;
+typedef struct {
+  char name[56];
+  char id[7];
+  float price;
+  int locker;
+} Fitness;
 
-Member *addMember(Member *arr, int *count)
-{
-    (*count)++;
-    arr = realloc(arr, (*count) * sizeof(Member));
-    if (arr == NULL)
-    {
-        printf("Realloc Error!!!");
-        exit(1);
-    }
+Fitness *zad1(Fitness *arr, int *count) {
+  (*count)++;
+  FILE *ft = fopen("membersText.txt", "a");
+  if (ft == NULL) {
+    printf("ft error\n");
+    exit(1);
+  }
 
-    Member *m = &arr[(*count)-1];
-    printf("Name: "); scanf(" %[^\n]",m->name);
-    printf("ID: "); scanf("%s", m->id);
-    printf("Price: "); scanf("%f", &m->price);
-    printf("Locker: "); scanf("%d", &m->locker);
+  arr = realloc(arr, (*count) * sizeof(Fitness));
+  if (arr == NULL) {
+    printf("arr realloc error\n");
+    exit(1);
+  }
 
-    FILE *f = fopen("membersText.txt", "a");
-    if (f == NULL)
-    {
-        printf("File Error!!!");
-        exit(1);
-    }
+  Fitness *f = &arr[(*count) - 1];
+  printf("Full Name: ");
+  scanf("%55[^\n]", f->name);
+  printf("ID: ");
+  scanf("%6s", f->id);
+  printf("Price: ");
+  scanf("%f", &f->price);
+  printf("Locker Code (example: 123): ");
+  scanf("%d", &f->locker);
 
-    fprintf(f, "%d;%s;%s;%.2f;%d\n",(int)strlen(m->name),m->name,m->id,m->price,m->locker);
+  fprintf(ft, "%d;%55s;%6s;%.2f;%d\n", (int)strlen(f->name), f->name, f->id,
+          f->price, f->locker);
 
-    fclose(f);
-    return arr;
+  fclose(ft);
+  return arr;
 }
 
-void findBelowAvg(Member *arr, int count)
-{
-    float sum = 0;
-    for (int i = 0; i < count; i++)
-    {
-        sum+=arr[i].price;
-    }
-    float avg = sum/count;
+void zad2(Fitness *arr, int count) {
+  float sum = 0;
+  float avg = 0;
+  for (int i = 0; i < count; i++) {
+    sum += arr[i].price;
+  }
 
-    for (int i = 0; i < count; i++){
-        if (arr[i].price < avg){
-            printf("%s - %s - %.2f - avg:%.2f\n", arr[i].name, arr[i].id, arr[i].price,avg);
-        }
+  avg = sum / count;
+  for (int i = 0; i < count; i++) {
+    if (arr[i].price < avg) {
+      printf("%55s - %6s - %.2f\n", arr[i].name, arr[i].id, arr[i].price);
     }
+  }
 }
 
-void idBin(Member *arr, int count, char *sid)
-{
-    FILE *f = fopen("members.bin", "wb");
-    if (f==NULL)
-    {
-        printf("Bin File Error!!!");
-        exit(1);
-    }
-    fwrite(arr,sizeof(Member),count,f);
-    fclose(f);
+void zad3(char *id) {
+  FILE *fb = fopen("members.bin", "rb");
+  if (fb == NULL) {
+    printf("fb error");
+    exit(1);
+  }
 
-    f = fopen("members.bin", "rb");
-    if (f==NULL)
-    {
-      printf("Bin File Error!!!");
-      exit(1);
+  Fitness *f;
+  while (fread(f, sizeof(Fitness), 1, fb) == 1) {
+    if (strcmp(f->id, id) == 0) {
+      printf("Bin Names: %55s\n", f->name);
+      printf("Bin ID: %6s\n", f->id);
+      printf("Bin M_Price: %.2f\n", f->price);
+      printf("Bin Locker: %d\n", f->locker);
+      break;
     }
+  }
 
-    Member m;
-    while(fread(&m,sizeof(Member), 1,f) == 1){
-        if (strcmp(m.id, sid) == 0){
-            printf("Bin Names: %s\n", m.name);
-            printf("Bin ID: %s\n", m.id);
-            printf("Bin M_Price: %.2f\n", m.price);
-            printf("Bin Locker: %d\n", m.locker);
-            break;
-        }
-    }
-
-    fclose(f);
+  fclose(fb);
 }
 
+int main(void) {
+  Fitness *arr = NULL;
+  int count = 0;
 
+  arr = zad1(arr, &count);
 
-int main(void)
-{
-    Member *arr = NULL;
-    int count = 0;
+  zad2(arr, count);
 
-    arr = addMember(arr,&count);
-    arr = addMember(arr, &count);
-    arr = addMember(arr, &count);
+  char *id = {"AA1234"};
+  zad3(id);
 
-    findBelowAvg(arr, count);
-
-    char sid[7];
-    printf("sid: "); scanf("%6s", sid);
-    idBin(arr, count, sid);
-
-
-    free(arr);
-    return 0;
+  free(arr);
+  return 0;
 }

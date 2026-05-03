@@ -1,82 +1,85 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-typedef struct
-{
-    char name[31];
-    char chip[8];
-    float price;
+typedef struct {
+  char name[31];
+  char id[8];
+  float price;
 } Patient;
 
-Patient *addPatient(Patient *arr, int *count)
-{
-    (*count)++;
-    arr = realloc(arr, (*count) * sizeof(Patient));
-    if (arr == NULL)
-    {
-        printf("Realloc Error!!!");
-        exit(1);
-    }
-    Patient *p = &arr[(*count) - 1];
-    printf("Name: "); scanf(" %30[^\n]",p->name);
-    printf("Chip: "); scanf("%7s", p->chip);
-    printf("Price: "); scanf("%f", &p->price);
+Patient *zad1(Patient *arr, int *n) {
+  (*n)++;
+  FILE *ft = fopen("animalsText.txt", "a");
+  if (ft == NULL) {
+    printf("ft error");
+    exit(1);
+  }
 
-    FILE *f = fopen("animalsText.txt", "a");
-    if (f == NULL)
-    {
-        printf("File Error!!!");
-        exit(1);
-    }
+  arr = realloc(arr, (*n) * sizeof(Patient));
+  if (arr == NULL) {
+    printf("arr realloc error");
+    exit(1);
+  }
 
-    fprintf(f,"%s,%f", p->name,p->price);
+  Patient *p = &arr[(*n) - 1];
+  printf("Name: ");
+  scanf("%30[^\n]", p->name);
+  printf("Chip ID: ");
+  scanf("%7s", p->id);
+  printf("Price: ");
+  scanf("%f", &p->price);
 
+  fprintf(ft, "%30s,%.2f", p->name, p->price);
 
-    free(f);
-    return arr;
+  fclose(ft);
+  return arr;
 }
 
-void nameByPrice(Patient *arr, int count, float price)
-{
-    int found = 0;
-    for (int i = 0; i < count; i++)
-    {
-        if (arr[i].price == price)
-        {
-            printf("%s - %s", arr[i].name, arr[i].chip);
-            found = 1;
-        }
+void zad2(Patient *arr, int n, float price) {
+  int found = 0;
+  for (int i = 0; i < n; i++) {
+    if (arr[i].price == price) {
+      printf("%30s - %7s\n", arr[i].name, arr[i].id);
+      found = 1;
+      break;
     }
-
-    if (!found)
-      printf("No such price");
+  }
+  if (!found) {
+    printf("price not found\n");
+    exit(1);
+  }
 }
 
-void priceBin(float price)
-{
-    FILE *f = fopen("animalsBin.bin", "rb");
-    if (f==NULL){
-        printf("Error!!!");
-        exit(1);
-    }
+void zad3(float price) {
+  FILE *fb = fopen("animalsBin.bin", "rb");
+  if (fb == NULL) {
+    printf("fb error\n");
+    exit(1);
+  }
 
-    Patient p;
-    while (fread(&p, sizeof(Patient), 1, f) == 1) {
-      if (p.price >= price) {
-        printf("Bin Names: %s\n", p.name);
-        printf("Bin chip: %s\n", p.chip);
-        printf("Bin Price: %.2f\n", p.price);
-        printf("---------------");
-        break;
-      }
+  Patient p;
+  while (fread(&p, sizeof(Patient), 1, fb) == 1) {
+    if (p.price >= price) {
+      printf("Bin OwnerName: %30s\n", p.name);
+      printf("Bin Chip: %7s\n", p.id);
+      printf("Bin Price: %.2f\n", p.price);
+      printf("--------------------------------\n");
     }
-
-    fclose(f);
+  }
+  fclose(fb);
 }
 
-int main(void)
-{
-    Patient *arr = NULL;
-    int count = 0;
+int main(void) {
+  Patient *arr = NULL;
+  int n = 0;
+
+  arr = zad1(arr, &n);
+
+  float p = 17.25;
+  zad2(arr, n, p);
+
+  zad3(p);
+
+  free(arr);
+  return 0;
 }
