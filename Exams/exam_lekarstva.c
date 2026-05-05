@@ -5,87 +5,56 @@
 typedef struct {
   char name[31];
   char date[8];
-  unsigned long long int id;
+  unsigned long long id;
   float price;
-  int quantity;
+  int qty;
 } Medicine;
 
-Medicine *zad1(Medicine *arr, int *count) {
-  FILE *fb = fopen("medicine.bin", "rb");
-  if (fb == NULL) {
-    printf("fb error");
-    exit(1);
-  }
-
-  fseek(fb, 0, SEEK_END);
-  *count = ftell(fb) / sizeof(Medicine);
-  fseek(fb, 0, SEEK_SET);
-
-  arr = malloc((*count) * sizeof(Medicine));
-  if (arr == NULL) {
-    printf("arr malloc error");
-    exit(1);
-  }
-
-  fread(arr, sizeof(Medicine), *count, fb);
-
-  fclose(fb);
-  return arr;
-}
-
-Medicine *zad2(Medicine *arr, int count, char *date, Medicine *result, int *n) {
-  int targetYear, targetMonth;
+Medicine *zad2(Medicine *arr, int count, char *date) {
+  int targetMonth, targetYear;
   sscanf(date, "%d.%d", &targetMonth, &targetYear);
 
-  int found = 0;
+  Medicine *result = NULL;
+  int n = 0;
+  int curMonth, curYear;
 
   for (int i = 0; i < count; i++) {
-    int curYear, curMonth;
     sscanf(arr[i].date, "%d.%d", &curMonth, &curYear);
     if (curYear < targetYear ||
         (curYear == targetYear && curMonth < targetMonth)) {
-      (*n)++;
-      found = 1;
-      result = realloc(result, (*n) * sizeof(Medicine));
+      n++;
+      result = realloc(result, n * sizeof(Medicine));
       if (result == NULL) {
-        printf("result realloc error");
-        exit(1);
+        return NULL;
       }
-
-      result[(*n) - 1] = arr[i];
+      result[n - 1] = arr[i];
     }
-  }
-  if (!found) {
-    return NULL;
   }
 
   return result;
 }
 
-int zad3(Medicine *arr, int count, float minPrice, float maxPrice, int *n) {
+int zad3(Medicine *arr, int count, float minPrice, float maxPrice) {
   FILE *ft = fopen("offer.txt", "w");
   if (ft == NULL) {
-    printf("ft error");
     exit(1);
   }
 
+  int counter = 0;
+
   for (int i = 0; i < count; i++) {
     if (arr[i].price >= minPrice && arr[i].price <= maxPrice) {
-      (*n)++;
-      fprintf(ft, "%s\n%s\n%llu\n%.2fleva\n", arr[i].name, arr[i].date,
+      counter++;
+      fprintf(ft, "%s\n%s\n%llu\n%.2fleva\n\n", arr[i].name, arr[i].date,
               arr[i].id, arr[i].price);
     }
   }
 
-  if (*n == 0) {
-    return 0;
-  }
-
   fclose(ft);
-  return *n;
+  return counter;
 }
 
-void zad4(Medicine *arr, int *count, char *name, char *date) {
+Medicine *zad4(Medicine *arr, int *count, char *name, char *date) {
   int idx = -1;
   for (int i = 0; i < *count; i++) {
     if (strcmp(arr[i].name, name) == 0 && strcmp(arr[i].date, date) == 0) {
@@ -95,14 +64,45 @@ void zad4(Medicine *arr, int *count, char *name, char *date) {
   }
 
   if (idx == -1) {
-    printf("error");
-    return;
+    printf("No such element.");
+    exit(1);
   }
 
   for (int i = idx; i < *count - 1; i++) {
     arr[i] = arr[i + 1];
   }
+
   (*count)--;
   arr = realloc(arr, (*count) * sizeof(Medicine));
-  printf("Deleted");
+  if (arr == NULL) {
+    exit(1);
+  }
+
+  return arr;
+}
+
+int main(void) {
+  // zad.1:
+  FILE *fb = fopen("medicines.bin", "rb");
+  if (fb == NULL) {
+    exit(1);
+  }
+
+  Medicine *medicines = NULL;
+  Medicine temp;
+  int count = 0;
+
+  while (fread(&temp, sizeof(Medicine), 1, fb) == 1) {
+    count++;
+    medicines = realloc(medicines, count * sizeof(Medicine));
+    if (medicines == NULL) {
+      exit(1);
+    }
+
+    medicines[count - 1] = temp;
+  }
+
+  fclose(fb);
+  free(medicines);
+  return 0;
 }
